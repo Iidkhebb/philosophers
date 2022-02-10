@@ -9,12 +9,12 @@ int ft_timestamp_in_ms()
 
 	gettimeofday(&current_time, NULL);
 
+	current = current_time.tv_sec * 1000;
+	current += current_time.tv_usec / 1000;
+
 	if (!prv)
-		prv = current_time.tv_usec;
-	current = current_time.tv_usec;
+		prv = current;
 	out += (current - prv);
 	prv = current;
-
 	return (out);
 }
-
