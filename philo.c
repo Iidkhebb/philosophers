@@ -1,10 +1,28 @@
 # include "philo.h"
 
+void checker_thread(t_profile *list)
+{
+	pthread_t	checker;
+	if (list->eating_fq > 0)
+	{
+		pthread_create(&checker, NULL, &philo_checker, list);
+		pthread_join(checker ,NULL);
+	}
+}
+
+void main_logic(t_profile *list)
+{
+	ft_lstlast(list)->next = list;
+	thread_create(list);
+	checker_thread(list);
+	join_threads(list);
+	pthread_mutex_destroy(&list->fork);
+}
+
 int main(int ac, char *av[])
 {
 	t_profile	*list;
 	t_profile	*data;
-	pthread_t	checker;
 	int			count;
 
 	if  (ac != 1)
@@ -14,7 +32,6 @@ int main(int ac, char *av[])
 		list = NULL;
 		data->ph_id = 1;
 		count = data->nbr_philo;
-
 		while (count != 0)
 		{
 			ft_lstadd_back(&list, ft_lstnew(data));
@@ -22,22 +39,9 @@ int main(int ac, char *av[])
 			count--;
 		}
 		free(data);
-		ft_lstlast(list)->next = list;
-		thread_create(list);
-		if (list->eating_fq > 0)
-		{
-			pthread_create(&checker, NULL, &philo_checker, list);
-			pthread_join(checker ,NULL);
-		}
-		join_threads(list);
-		pthread_mutex_destroy(&list->fork);
+		main_logic(list);
 	}
 	else
-	{
 		ft_how_use();
-	}
-
-	//free((t_profile *)data);
-	//ft_lstclear(&list);
 	return (0);
 }
