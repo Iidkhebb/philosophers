@@ -16,6 +16,7 @@ t_profile	*ft_lstnew(t_profile *data)
 		return (0);
 
 	new->ph_id = data->ph_id;
+	new->nbr_philo = data->nbr_philo;
 	new->time_d = data->time_d;
 	new->time_e = data->time_e;
 	new->time_s = data->time_s;
