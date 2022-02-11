@@ -42,6 +42,11 @@ void *philo_checker(void *args)
 		{
 			break ;
 		}
+		if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
+		{
+			printf("%d %d is dead\n", ft_timestamp_in_ms(), list->ph_id);
+			exit(0);
+		}
 		i = 0;
 		count = 0;
 	}
@@ -58,6 +63,7 @@ void thread_create(t_profile *list)
 	{
 		pthread_mutex_init(&list->fork, NULL);
 		pthread_create(&list->thread_philo, NULL, &philo_logic, list);
+		usleep(50);
 		list = list->next;
 		i++;
 	}
