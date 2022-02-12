@@ -3,11 +3,11 @@
 void checker_thread(t_profile *list)
 {
 	pthread_t	checker;
-	if (list->eating_fq > 0)
-	{
-		pthread_create(&checker, NULL, &philo_checker, list);
-		pthread_join(checker ,NULL);
-	}
+
+	pthread_create(&checker, NULL, &philo_checker, list);
+	pthread_join(checker ,NULL);
+
+	return ;
 }
 
 void main_logic(t_profile *list)
