@@ -68,6 +68,7 @@ void *philo_checker(void *args)
 	printf("All Philosophers are Full\n");
 	return NULL;
 }
+
 void mutex_init(t_profile *list)
 {
 	int i;
@@ -81,6 +82,7 @@ void mutex_init(t_profile *list)
 		i++;
 	}
 }
+
 void thread_create(t_profile *list)
 {
 	int i;

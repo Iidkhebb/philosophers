@@ -1,6 +1,5 @@
 # include "philo.h"
 
-
 void checker_thread(t_profile *list)
 {
 	pthread_t	checker;
@@ -18,6 +17,26 @@ void main_logic(t_profile *list)
 	join_threads(list);
 	pthread_mutex_destroy(&list->fork);
 }
+void list_free(t_profile *list)
+{
+	int i;
+	int loop;
+
+	t_profile	*tmp;
+	if (!list)
+		return ;
+	i = 0;
+	loop = list->nbr_philo;
+	while (i < loop)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+		i++;
+	}
+	list = NULL;
+	return ;
+}
 
 int main(int ac, char *av[])
 {
@@ -25,7 +44,6 @@ int main(int ac, char *av[])
 	t_profile	*data;
 	int			count;
 	pthread_mutex_t pen;
-
 
 	if  (ac != 1)
 	{
@@ -42,7 +60,7 @@ int main(int ac, char *av[])
 		}
 		free(data);
 		main_logic(list);
-
+		list_free(list);
 	}
 	else
 		ft_how_use();
