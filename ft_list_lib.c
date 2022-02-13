@@ -1,11 +1,5 @@
 # include "philo.h"
 
-void	ft_lstadd_front(t_profile **lst, t_profile *new)
-{
-	new->next = *lst;
-	*lst = new;
-}
-
 t_profile	*ft_lstnew(t_profile *data, pthread_mutex_t *pen)
 {
 	t_profile	*new;
@@ -13,7 +7,6 @@ t_profile	*ft_lstnew(t_profile *data, pthread_mutex_t *pen)
 	new = (t_profile *)malloc(sizeof(t_profile));
 	if (!(new))
 		return (0);
-
 	new->ph_id = data->ph_id;
 	new->nbr_philo = data->nbr_philo;
 	new->time_d = data->time_d;

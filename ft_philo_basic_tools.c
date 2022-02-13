@@ -1,40 +1,5 @@
 # include "philo.h"
 
-void ft_init(t_profile *data)
-{
-	data->nbr_philo = 0;
-	data->time_d = 0;
-	data->time_e = 0;
-	data->time_s = 0;
-	data->last_e = 0;
-	data->eating_fq = 0;
-}
-
-void get_args(t_profile *data, char  *av[])
-{
-	ft_init(data);
-	data->nbr_philo = ft_atoi(av[1]);
-	data->time_d = ft_atoi(av[2]);
-	data->time_e = ft_atoi(av[3]);
-	data->time_s = ft_atoi(av[4]);
-	if (av[5])
-		data->eating_fq = ft_atoi(av[5]);
-}
-
-void detach_threads(t_profile *list)
-{
-	int i;
-
-	i = 0;
-	while (i < list->nbr_philo)
-	{
-		pthread_detach(list->thread_philo);
-		list = list->next;
-		i++;
-	}
-	return ;
-}
-
 int eat_count(t_profile *list)
 {
 	if (list->eating_fq > 0)
@@ -61,7 +26,7 @@ void *philo_checker(void *args)
 			if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
 			{
 				pthread_mutex_lock(list->pen);
-				printf("%d %d is dead\n", ft_timestamp_in_ms(), list->ph_id);
+				printf("\x1B[31m%d %d is dead\n\x1B[33m", ft_timestamp_in_ms(), list->ph_id);
 				return NULL;
 			}
 			list = list->next;

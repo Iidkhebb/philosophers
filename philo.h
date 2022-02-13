@@ -24,20 +24,15 @@ typedef struct s_profile
 	pthread_t			thread_philo;
 	pthread_mutex_t		fork;
 	pthread_mutex_t		*pen;
-	struct s_test		*ptr;
 
 }	t_profile;
 
 int			ft_timestamp_in_ms();
 t_profile	*ft_lstnew(t_profile *data, pthread_mutex_t *pen);
-void		ft_lstadd_front(t_profile **lst, t_profile *new);
 void		ft_lstadd_back(t_profile **lst, t_profile *new);
-size_t		ft_strlen(const char *str);
 void		ft_how_use(void);
 int			ft_atoi(const char *str);
 void		get_args(t_profile *data, char  *av[]);
-void		ft_lstclear(t_profile **lst);
-void		ft_lstdelone(t_profile *lst);
 void		ft_init(t_profile *data);
 t_profile	*ft_lstlast(t_profile *lst);
 void		*philo_checker(void *args);
