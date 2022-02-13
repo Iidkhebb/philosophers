@@ -1,12 +1,12 @@
 # include "philo.h"
 
+
 void checker_thread(t_profile *list)
 {
 	pthread_t	checker;
 
 	pthread_create(&checker, NULL, &philo_checker, list);
 	pthread_join(checker ,NULL);
-
 	return ;
 }
 
@@ -24,6 +24,8 @@ int main(int ac, char *av[])
 	t_profile	*list;
 	t_profile	*data;
 	int			count;
+	pthread_mutex_t pen;
+
 
 	if  (ac != 1)
 	{
@@ -34,12 +36,13 @@ int main(int ac, char *av[])
 		count = data->nbr_philo;
 		while (count != 0)
 		{
-			ft_lstadd_back(&list, ft_lstnew(data));
+			ft_lstadd_back(&list, ft_lstnew(data, &pen));
 			data->ph_id++;
 			count--;
 		}
 		free(data);
 		main_logic(list);
+
 	}
 	else
 		ft_how_use();

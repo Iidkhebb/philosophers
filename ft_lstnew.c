@@ -7,7 +7,7 @@ void	ft_lstadd_front(t_profile **lst, t_profile *new)
 }
 
 
-t_profile	*ft_lstnew(t_profile *data)
+t_profile	*ft_lstnew(t_profile *data, pthread_mutex_t *pen)
 {
 	t_profile	*new;
 
@@ -21,8 +21,8 @@ t_profile	*ft_lstnew(t_profile *data)
 	new->time_e = data->time_e;
 	new->time_s = data->time_s;
 	new->eating_fq = data->eating_fq;
-
 	new->next = NULL;
+	new->pen = pen;
 	return (new);
 }
 

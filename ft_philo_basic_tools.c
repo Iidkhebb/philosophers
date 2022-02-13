@@ -21,6 +21,20 @@ void get_args(t_profile *data, char  *av[])
 		data->eating_fq = ft_atoi(av[5]);
 }
 
+void detach_threads(t_profile *list)
+{
+	int i;
+
+	i = 0;
+	while (i < list->nbr_philo)
+	{
+		pthread_detach(list->thread_philo);
+		list = list->next;
+		i++;
+	}
+	return ;
+}
+
 void *philo_checker(void *args)
 {
 	t_profile *list = (t_profile *)args;
@@ -34,27 +48,25 @@ void *philo_checker(void *args)
 			if (list->eating_fq > 0)
 			{
 				if (list->last_e_fq >= list->eating_fq)
-				{
 					count++;
-				}
 			}
 			if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
 			{
+				pthread_mutex_lock(list->pen);
 				printf("%d %d is dead\n", ft_timestamp_in_ms(), list->ph_id);
-				exit(0);
+				return NULL;
 			}
 			list = list->next;
 			i++;
 		}
 		if (count >= list->nbr_philo)
-		{
 			break ;
-		}
 		i = 0;
 		count = 0;
 	}
-	printf("ALL EATED\n");
-	exit(0);
+	pthread_mutex_lock(list->pen);
+	printf("All Philosophers are Full\n");
+	return NULL;
 }
 void mutex_init(t_profile *list)
 {
@@ -63,6 +75,7 @@ void mutex_init(t_profile *list)
 	i = 0;
 	while (i < list->nbr_philo)
 	{
+		pthread_mutex_init(list->pen, NULL);
 		pthread_mutex_init(&list->fork, NULL);
 		list = list->next;
 		i++;
@@ -76,9 +89,8 @@ void thread_create(t_profile *list)
 	mutex_init(list);
 	while (i < list->nbr_philo)
 	{
-		// pthread_mutex_init(&list->fork, NULL);
 		pthread_create(&list->thread_philo, NULL, &philo_logic, list);
-		usleep(100);
+		usleep(90);
 		list = list->next;
 		i++;
 	}
@@ -91,7 +103,7 @@ void join_threads(t_profile *list)
 	i = 0;
 	while (i < list->nbr_philo)
 	{
-		pthread_join(list->thread_philo ,NULL);
+		pthread_detach(list->thread_philo);
 		list = list->next;
 		i++;
 	}
