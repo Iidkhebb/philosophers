@@ -6,7 +6,6 @@ void	ft_lstadd_front(t_profile **lst, t_profile *new)
 	*lst = new;
 }
 
-
 t_profile	*ft_lstnew(t_profile *data, pthread_mutex_t *pen)
 {
 	t_profile	*new;
@@ -50,26 +49,4 @@ void	ft_lstadd_back(t_profile **lst, t_profile *new)
 	}
 	last_node = ft_lstlast(*lst);
 	last_node->next = new;
-}
-
-void	ft_lstdelone(t_profile *lst)
-{
-	if (!(lst))
-		return ;
-	free(lst);
-}
-
-void	ft_lstclear(t_profile **lst)
-{
-	t_profile	*tmp;
-
-	if (!(*lst))
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst);
-		*lst = tmp;
-	}
-	*lst = NULL;
 }

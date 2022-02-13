@@ -17,13 +17,13 @@ void *philo_logic(void *args)
 		pthread_mutex_lock(&data->fork);
 
 		pthread_mutex_lock(data->pen);
-		printf("\x1B[32m%d %d has taken a fork\n\x1B[37m", ft_timestamp_in_ms(), data->ph_id); // eating
+		printf("%d %d has taken a fork\n", ft_timestamp_in_ms(), data->ph_id); // eating
 		pthread_mutex_unlock(data->pen);
 
 		pthread_mutex_lock(&data->next->fork);
 
 		pthread_mutex_lock(data->pen);
-		printf("\x1B[32m%d %d has taken next fork of philo %d\n\x1B[37m", ft_timestamp_in_ms(), data->ph_id, data->next->ph_id); // eating
+		printf("%d %d has taken next fork\n", ft_timestamp_in_ms(), data->ph_id); // eating
 		pthread_mutex_unlock(data->pen);
 
 		pthread_mutex_lock(data->pen);

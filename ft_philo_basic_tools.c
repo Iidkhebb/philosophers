@@ -35,21 +35,29 @@ void detach_threads(t_profile *list)
 	return ;
 }
 
+int eat_count(t_profile *list)
+{
+	if (list->eating_fq > 0)
+	{
+		if (list->last_e_fq >= list->eating_fq)
+			return 1;
+	}
+	return 0;
+}
+
 void *philo_checker(void *args)
 {
 	t_profile *list = (t_profile *)args;
-	int i = 0;
-	int count = 0;
+	int i;
+	int count;
 
 	while (1)
 	{
+		i = 0;
+		count = 0;
 		while (i < list->nbr_philo)
 		{
-			if (list->eating_fq > 0)
-			{
-				if (list->last_e_fq >= list->eating_fq)
-					count++;
-			}
+			count += eat_count(list);
 			if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
 			{
 				pthread_mutex_lock(list->pen);
@@ -61,11 +69,8 @@ void *philo_checker(void *args)
 		}
 		if (count >= list->nbr_philo)
 			break ;
-		i = 0;
-		count = 0;
 	}
 	pthread_mutex_lock(list->pen);
-	printf("All Philosophers are Full\n");
 	return NULL;
 }
 
