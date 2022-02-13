@@ -1,11 +1,9 @@
 NAME = philo
 CC = gcc
-FLAGS =
-
+FLAGS = -Wall -Werror -Wextra
 INC = philo.h
 
 CFILES = ft_atoi.c ft_how_to_use.c ft_list_lib.c ft_philo_basic_tools.c ft_timestamp_in_ms.c philo_logic.c philo.c
-
 OCFILES = ${CFILES:.c=.o}
 
 all : display program
