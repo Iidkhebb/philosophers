@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:58:22 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:22:05 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <pthread.h>
-#include <semaphore.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <sys/stat.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <semaphore.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 
 typedef struct s_profile
 {
@@ -37,12 +49,12 @@ typedef struct s_pid
 
 }t_pid;
 
-int		ft_timestamp_in_ms();
+int		ft_timestamp_in_ms(void);
 t_pid	*ft_lstnew(int pid);
 void	ft_lstadd_back(t_pid **lst, t_pid *new);
 void	ft_how_use(void);
 int		ft_atoi(const char *str);
-void	get_args(t_profile *data, char  *av[]);
+void	get_args(t_profile *data, char *av[]);
 void	ft_init(t_profile *data);
 void	semaphore_init(t_profile *data);
 void	quit_process(t_profile *data);

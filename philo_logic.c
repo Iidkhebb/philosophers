@@ -1,6 +1,18 @@
-# include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_logic.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:57:11 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:39:41 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ft_init(t_profile *data)
+#include "philo.h"
+
+void	ft_init(t_profile *data)
 {
 	data->nbr_philo = 0;
 	data->time_d = 0;
@@ -8,9 +20,10 @@ void ft_init(t_profile *data)
 	data->time_s = 0;
 	data->last_e = 0;
 	data->eating_fq = 0;
+	data->last_e = 0;
 }
 
-void get_args(t_profile *data, char  *av[])
+void	get_args(t_profile *data, char *av[])
 {
 	ft_init(data);
 	data->nbr_philo = ft_atoi(av[1]);
@@ -21,13 +34,13 @@ void get_args(t_profile *data, char  *av[])
 		data->eating_fq = ft_atoi(av[5]);
 }
 
-void unlock_mutex(t_profile *data)
+void	unlock_mutex(t_profile *data)
 {
 	pthread_mutex_unlock(&data->fork);
 	pthread_mutex_unlock(&data->next->fork);
 }
 
-void print_fork_taken(t_profile *data)
+void	print_fork_taken(t_profile *data)
 {
 	pthread_mutex_lock(&data->fork);
 	pthread_mutex_lock(data->pen);
@@ -35,10 +48,11 @@ void print_fork_taken(t_profile *data)
 	pthread_mutex_unlock(data->pen);
 }
 
-void *philo_logic(void *args)
+void	*philo_logic(void *args)
 {
-	t_profile *data = (t_profile *)args;
+	t_profile	*data;
 
+	data = (t_profile *)args;
 	while (1)
 	{
 		print_fork_taken(data);

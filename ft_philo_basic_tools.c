@@ -1,21 +1,34 @@
-# include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_philo_basic_tools.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:57:35 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:15:42 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int eat_count(t_profile *list)
+#include "philo.h"
+
+int	eat_count(t_profile *list)
 {
 	if (list->eating_fq > 0)
 	{
 		if (list->last_e_fq >= list->eating_fq)
-			return 1;
+			return (1);
 	}
-	return 0;
+	return (0);
 }
 
-void *philo_checker(void *args)
+void	*philo_checker(void *args)
 {
-	t_profile *list = (t_profile *)args;
-	int i;
-	int count;
+	t_profile	*list;
+	int			i;
+	int			count;
 
+	list = (t_profile *)args;
 	while (1)
 	{
 		i = 0;
@@ -24,11 +37,7 @@ void *philo_checker(void *args)
 		{
 			count += eat_count(list);
 			if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
-			{
-				pthread_mutex_lock(list->pen);
-				printf("\x1B[31m%d %d is dead\n\x1B[33m", ft_timestamp_in_ms(), list->ph_id);
-				return NULL;
-			}
+				return (extra(list));
 			list = list->next;
 			i++;
 		}
@@ -36,12 +45,12 @@ void *philo_checker(void *args)
 			break ;
 	}
 	pthread_mutex_lock(list->pen);
-	return NULL;
+	return (NULL);
 }
 
-void mutex_init(t_profile *list)
+void	mutex_init(t_profile *list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < list->nbr_philo)
@@ -53,9 +62,9 @@ void mutex_init(t_profile *list)
 	}
 }
 
-void thread_create(t_profile *list)
+void	thread_create(t_profile *list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	mutex_init(list);
@@ -68,9 +77,9 @@ void thread_create(t_profile *list)
 	}
 }
 
-void join_threads(t_profile *list)
+void	join_threads(t_profile *list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < list->nbr_philo)

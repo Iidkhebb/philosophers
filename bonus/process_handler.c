@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_handler.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:57:51 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:38:03 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
-void semaphore_init(t_profile *data)
+void	semaphore_init(t_profile *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	sem_unlink("fork");
@@ -18,9 +30,9 @@ void semaphore_init(t_profile *data)
 	}
 }
 
-void quit_process(t_profile *data)
+void	quit_process(t_profile *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nbr_philo)
@@ -30,10 +42,10 @@ void quit_process(t_profile *data)
 	}
 }
 
-void kill_process(t_pid *pid_list, t_profile *data)
+void	kill_process(t_pid *pid_list, t_profile *data)
 {
-	t_pid *save_addr;
-	int i;
+	t_pid	*save_addr;
+	int		i;
 
 	i = 0;
 	while (i < data->nbr_philo)
@@ -51,16 +63,18 @@ void kill_process(t_pid *pid_list, t_profile *data)
 	list_free(save_addr);
 }
 
-void *checker_func(void *data)
+void	*checker_func(void *data)
 {
-	t_profile *list = (t_profile *)data;
+	t_profile	*list;
 
+	list = (t_profile *)data;
 	while (1)
 	{
 		if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
 		{
 			sem_wait(list->pen);
-			printf("\x1B[31m%d %d is dead\n\x1B[33m", ft_timestamp_in_ms(), list->ph_id);
+			printf("\x1B[31m%d %d is dead\n\x1B[33m",
+				ft_timestamp_in_ms(), list->ph_id);
 			quit_process(data);
 		}
 		if (list->eating_fq > 0)
@@ -72,7 +86,7 @@ void *checker_func(void *data)
 	}
 }
 
-void philo_life(t_profile *data)
+void	philo_life(t_profile *data)
 {
 	while (1)
 	{

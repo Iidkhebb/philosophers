@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:58:10 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:36:46 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
 int	ft_atoi(const char *str)
@@ -25,7 +37,7 @@ int	ft_atoi(const char *str)
 	return (r * sign);
 }
 
-void ft_init(t_profile *data)
+void	ft_init(t_profile *data)
 {
 	data->nbr_philo = 0;
 	data->time_d = 0;
@@ -33,9 +45,10 @@ void ft_init(t_profile *data)
 	data->time_s = 0;
 	data->last_e = 0;
 	data->eating_fq = 0;
+	data->last_e_fq = 0;
 }
 
-void get_args(t_profile *data, char  *av[])
+void	get_args(t_profile *data, char *av[])
 {
 	ft_init(data);
 	data->nbr_philo = ft_atoi(av[1]);

@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:57:55 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:24:22 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
-void main_logic(t_profile *data)
+void	main_logic(t_profile *data)
 {
-	pthread_t checker;
+	pthread_t	checker;
 
 	pthread_create(&checker, NULL, &checker_func, data);
 	philo_life(data);
 }
 
-t_pid *process_init(t_profile *data, char **av)
+t_pid	*process_init(t_profile *data, char **av)
 {
-	int loop;
-	int pid;
-	t_pid *pid_list;
+	int		loop;
+	int		pid;
+	t_pid	*pid_list;
 
 	pid_list = NULL;
 	loop = 0;
@@ -29,12 +41,12 @@ t_pid *process_init(t_profile *data, char **av)
 		if (data->ph_id % 2 != 0)
 			usleep(100);
 	}
-	return pid_list;
+	return (pid_list);
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	t_profile *data;
+	t_profile	*data;
 
 	if (ac != 1)
 	{
@@ -43,5 +55,5 @@ int main(int ac, char *av[])
 	}
 	else
 		ft_how_use();
-	return 0;
+	return (0);
 }

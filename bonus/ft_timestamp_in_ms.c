@@ -1,6 +1,18 @@
-# include "philo_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_timestamp_in_ms.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:57:29 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:24:42 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_timestamp_in_ms()
+#include "philo_bonus.h"
+
+int	ft_timestamp_in_ms(void)
 {
 	struct timeval	current_time;
 	int				current;

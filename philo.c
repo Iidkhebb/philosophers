@@ -1,15 +1,27 @@
-# include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:57:23 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:01:32 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void checker_thread(t_profile *list)
+#include "philo.h"
+
+void	checker_thread(t_profile *list)
 {
 	pthread_t	checker;
 
 	pthread_create(&checker, NULL, &philo_checker, list);
-	pthread_join(checker ,NULL);
+	pthread_join(checker, NULL);
 	return ;
 }
 
-void main_logic(t_profile *list)
+void	main_logic(t_profile *list)
 {
 	ft_lstlast(list)->next = list;
 	thread_create(list);
@@ -17,12 +29,13 @@ void main_logic(t_profile *list)
 	join_threads(list);
 	pthread_mutex_destroy(&list->fork);
 }
-void list_free(t_profile *list)
-{
-	int i;
-	int loop;
 
+void	list_free(t_profile *list)
+{
+	int			i;
+	int			loop;
 	t_profile	*tmp;
+
 	if (!list)
 		return ;
 	i = 0;
@@ -38,14 +51,14 @@ void list_free(t_profile *list)
 	return ;
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	t_profile	*list;
-	t_profile	*data;
-	int			count;
-	pthread_mutex_t pen;
+	t_profile		*list;
+	t_profile		*data;
+	int				count;
+	pthread_mutex_t	pen;
 
-	if  (ac != 1)
+	if (ac != 1)
 	{
 		data = (t_profile *)malloc(sizeof(t_profile));
 		get_args(data, av);

@@ -1,4 +1,16 @@
-# include "philo_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_lib.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 20:58:02 by iidkhebb          #+#    #+#             */
+/*   Updated: 2022/02/21 21:25:31 by iidkhebb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo_bonus.h"
 
 t_pid	*ft_lstnew(int pid)
 {
@@ -38,7 +50,7 @@ void	ft_lstadd_back(t_pid **lst, t_pid *new)
 	last_node->next = new;
 }
 
-void list_free(t_pid *list)
+void	list_free(t_pid *list)
 {
 	t_pid	*tmp;
 
