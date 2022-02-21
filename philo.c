@@ -6,7 +6,7 @@
 /*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:57:23 by iidkhebb          #+#    #+#             */
-/*   Updated: 2022/02/21 21:01:32 by iidkhebb         ###   ########.fr       */
+/*   Updated: 2022/02/21 22:09:01 by iidkhebb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ int	main(int ac, char *av[])
 	int				count;
 	pthread_mutex_t	pen;
 
-	if (ac != 1)
+	if (ac == 5 || ac == 6)
 	{
 		data = (t_profile *)malloc(sizeof(t_profile));
-		get_args(data, av);
+		if (get_args(data, av) != 1)
+			return (free(data), ft_how_use(), 0);
 		list = NULL;
 		data->ph_id = 1;
 		count = data->nbr_philo;
-		while (count != 0)
+		while (count-- != 0)
 		{
 			ft_lstadd_back(&list, ft_lstnew(data, &pen));
 			data->ph_id++;
-			count--;
 		}
 		free(data);
 		main_logic(list);

@@ -6,7 +6,7 @@
 /*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:57:55 by iidkhebb          #+#    #+#             */
-/*   Updated: 2022/02/21 21:24:22 by iidkhebb         ###   ########.fr       */
+/*   Updated: 2022/02/21 21:53:29 by iidkhebb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char *av[])
 {
 	t_profile	*data;
 
-	if (ac != 1)
+	if (ac == 5 || ac == 6)
 	{
 		data = (t_profile *)malloc(sizeof(t_profile));
 		kill_process(process_init(data, av), data);

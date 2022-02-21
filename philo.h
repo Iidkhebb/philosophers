@@ -6,7 +6,7 @@
 /*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:58:30 by iidkhebb          #+#    #+#             */
-/*   Updated: 2022/02/21 21:21:20 by iidkhebb         ###   ########.fr       */
+/*   Updated: 2022/02/21 22:17:09 by iidkhebb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_profile	*ft_lstnew(t_profile *data, pthread_mutex_t *pen);
 void		ft_lstadd_back(t_profile **lst, t_profile *new);
 void		ft_how_use(void);
 int			ft_atoi(const char *str);
-void		get_args(t_profile *data, char *av[]);
+int			get_args(t_profile *data, char *av[]);
 void		ft_init(t_profile *data);
 t_profile	*ft_lstlast(t_profile *lst);
 void		*philo_checker(void *args);

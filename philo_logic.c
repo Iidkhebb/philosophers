@@ -6,7 +6,7 @@
 /*   By: iidkhebb <iidkhebb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:57:11 by iidkhebb          #+#    #+#             */
-/*   Updated: 2022/02/21 21:39:41 by iidkhebb         ###   ########.fr       */
+/*   Updated: 2022/02/21 22:00:49 by iidkhebb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@ void	ft_init(t_profile *data)
 	data->last_e = 0;
 }
 
-void	get_args(t_profile *data, char *av[])
+int	get_args(t_profile *data, char *av[])
 {
 	ft_init(data);
 	data->nbr_philo = ft_atoi(av[1]);
+	if (data->nbr_philo < 1)
+		return (0);
 	data->time_d = ft_atoi(av[2]);
 	data->time_e = ft_atoi(av[3]);
 	data->time_s = ft_atoi(av[4]);
 	if (av[5])
 		data->eating_fq = ft_atoi(av[5]);
+	return (1);
 }
 
 void	unlock_mutex(t_profile *data)
