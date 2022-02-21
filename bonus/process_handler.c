@@ -42,6 +42,7 @@ void kill_process(t_pid *pid_list, t_profile *data)
         i++;
     }
     save_addr = pid_list;
+	free(data);
     while (pid_list)
     {
         kill(pid_list->pid, SIGQUIT);
