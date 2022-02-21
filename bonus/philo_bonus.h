@@ -32,8 +32,8 @@ typedef struct s_profile
 
 typedef struct s_pid
 {
-    int				pid;
-    struct s_pid	*next;
+	int				pid;
+	struct s_pid	*next;
 
 }t_pid;
 
