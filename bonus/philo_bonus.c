@@ -3,6 +3,7 @@
 void main_logic(t_profile *data)
 {
 	pthread_t checker;
+
 	pthread_create(&checker, NULL, &checker_func, data);
 	philo_life(data);
 }

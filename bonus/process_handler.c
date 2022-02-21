@@ -21,8 +21,8 @@ void semaphore_init(t_profile *data)
 void quit_process(t_profile *data)
 {
 	int i;
-	i = 0;
 
+	i = 0;
 	while (i < data->nbr_philo)
 	{
 		sem_post(data->philo_eated);
@@ -54,6 +54,7 @@ void kill_process(t_pid *pid_list, t_profile *data)
 void *checker_func(void *data)
 {
 	t_profile *list = (t_profile *)data;
+
 	while (1)
 	{
 		if ((int)ft_timestamp_in_ms() - list->last_e > list->time_d)
