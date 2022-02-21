@@ -66,10 +66,10 @@ void philo_life(t_profile *data)
     
 		printf("%d %d is eating\n", ft_timestamp_in_ms(), data->ph_id);
         sem_post(data->pen);
+		
+        usleep(data->time_e * 1000);
 		data->last_e = ft_timestamp_in_ms();
 		data->last_e_fq++;
-        usleep(data->time_e * 1000);
-		
 		
         sem_post(data->fork);
 		sem_post(data->fork);
@@ -112,7 +112,7 @@ t_pid *process_init(t_profile *data, char **av)
             main_logic(data);
         ft_lstadd_back(&pid_list, ft_lstnew(pid_list, pid));
         if (data->ph_id % 2 != 0)
-            usleep(100);
+            usleep(50);
     }
     return pid_list;
 }
