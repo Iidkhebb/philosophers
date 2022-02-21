@@ -25,7 +25,7 @@ void quit_process(t_profile *data)
 
     while (i < data->nbr_philo)
     {
-        sem_wait(data->philo_eated);
+        sem_post(data->philo_eated);
         i++;
     }
     
@@ -46,6 +46,7 @@ void *checker_func(void *data)
             if (list->last_e_fq >= list->eating_fq)
                 sem_post(list->philo_eated);
         }
+        usleep(500);
     }
     
 }
@@ -62,15 +63,13 @@ void philo_life(t_profile *data)
 		sem_wait(data->fork);
 		sem_wait(data->pen);
 		printf("%d %d has taken a fork\n", ft_timestamp_in_ms(), data->ph_id);
-        sem_post(data->pen);
-
-        sem_wait(data->pen);
+    
 		printf("%d %d is eating\n", ft_timestamp_in_ms(), data->ph_id);
         sem_post(data->pen);
-		
-        usleep(data->time_e * 1000);
 		data->last_e = ft_timestamp_in_ms();
 		data->last_e_fq++;
+        usleep(data->time_e * 1000);
+		
 		
         sem_post(data->fork);
 		sem_post(data->fork);
@@ -112,7 +111,8 @@ t_pid *process_init(t_profile *data, char **av)
         if (pid == 0)
             main_logic(data);
         ft_lstadd_back(&pid_list, ft_lstnew(pid_list, pid));
-        // usleep(90);
+        if (data->ph_id % 2 != 0)
+            usleep(100);
     }
     return pid_list;
 }
