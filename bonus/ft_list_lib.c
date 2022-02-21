@@ -1,6 +1,6 @@
 # include "philo_bonus.h"
 
-t_pid	*ft_lstnew(t_pid *data, int pid)
+t_pid	*ft_lstnew(int pid)
 {
 	t_pid	*new;
 
@@ -36,4 +36,20 @@ void	ft_lstadd_back(t_pid **lst, t_pid *new)
 	}
 	last_node = ft_lstlast(*lst);
 	last_node->next = new;
+}
+
+void list_free(t_pid *list)
+{
+	t_pid	*tmp;
+
+	if (!list)
+		return ;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+	list = NULL;
+	return ;
 }
